@@ -8,22 +8,68 @@
 using namespace std;
 
 const int MAX_COUNT = 8;
+const int HEX_VAL = 10;
+const int HEX_BASE = 16;
 const string INSTRUCTION[MAX_COUNT] = { "ADD", "ADDI", "SUB", "SUBI",
-"MOVE", "ORG", "TRAP", "END" };
+									    "MOVE", "ORG", "TRAP", "END" };
 const string HEX_VALS = "0123456789ABCDEF";
 
-string convDec2Hex(string);
-string decHexConv(int);
-int convHex2Dec(string);
-void spaceHexNum(string*);
-void fillHexNum(string*, int);
+string decHexConv(int numVal) {
+	char hexString[HEX_VAL];
+
+	_itoa_s(numVal, hexString, 16);
+	return hexString;
+}
+
+string convDec2Hex(string numVal) {
+	int val = atol(numVal.c_str());
+	return decHexConv(val);
+}
+
+int convHex2Dec(string numVal) {
+	int total = 0, val = 0;
+	int loc = 0; 
+
+	for (int i = 0; i<numVal.size(); i++)
+	{		
+		for (int i = 0; i < HEX_VALS.size(); i++)
+			if (toupper(numVal[numVal.size() - loc - 1]) == HEX_VALS[i])
+				val = i;
+
+		val = pow(HEX_BASE, loc) * val;
+		total += val;
+		loc++;
+	}
+
+	return total;
+}
+
+void spaceHexNum(string* numVal) {
+	int val = 0;
+	for (int i = 0; i < numVal->size(); i++)
+	{
+		if (val % 4 == 0 && val > 0)
+		{
+			numVal->insert(i, " ");
+			val = 0;
+		}
+		else
+			val++;
+	}
+}
+
+void fillHexNum(string* numVal, int numMem) {
+
+	for (int i = numVal->size(); i < numMem; i++)
+		*numVal = "0" + *numVal;
+}
 
 class passAssem {
 public:
 	passAssem() {
-		comment = " ", instruction = " ";
-		rightOper = " ", leftOper = " ";
-		//lineName = " ";
+		comment = "", instruction = "";
+		rightOper = "", leftOper = "";
+		lineName = "";
 	}
 
 	void setComment(string cmt) {
@@ -39,8 +85,14 @@ public:
 	}
 
 	void setOper(string oper) {
-		string pos; //FIXME
-
+		string::size_type posVal = oper.find(",", 0); 
+		if (posVal == string::npos) {
+			leftOper = oper;
+		}
+		else {
+			rightOper = oper.substr(posVal + 1, oper.size() - posVal + 1);
+			leftOper = oper.substr(0, posVal);
+		}
 	}
 
 	string computeDecHex(string curLoc, vector<string>& codeItems,
@@ -206,7 +258,6 @@ private:
 	string rightOper, leftOper;
 	string lineName;
 };
-
 
 int main() {
 
