@@ -43,7 +43,29 @@ public:
 
 	}
 
-	string compute; //FIXME
+	string compute(string curLoc, vector<string>& codeItems,
+		           vector<string>& symTable) {
+		string strAddress, strCom = instruction, valOper;
+		
+		fillHexNum(&curLoc, 4);
+
+		if (lineName != "") {
+			spaceHexNum(&curLoc);
+			strAddress = lineName + "\t" + curLoc;
+			symTable.push_back(strAddress);
+		}
+		
+		for (int i = 0; i < strCom.size(); i++)
+			strCom.push_back(toupper(strCom[i]));
+
+		int val = convHex2Dec(curLoc);
+
+		if (strCom == "ADD") {
+			if (leftOper.at(0) == '$') {
+
+			}
+		}
+	}
 
 private:
 	string comment, instruction;
