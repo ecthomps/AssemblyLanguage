@@ -290,6 +290,66 @@ int main() {
 		
 		getline(infile, newLine);
 		symNum = 1, comNum = 5;
+
+		for (int i = 0; i < newLine.size(); i++) {
+			if (isspace(newLine[i]) || i == newLine.size() - 1)
+			{
+				if (i == newLine.size() - 1)
+					symbol.append(1, newLine[i]);
+
+				if (symbol.size() > 0)
+				{
+					if (symNum == 1 && isCommand(symbol)) {
+						symNum = 3;
+						instruc = true;
+						cout << symbol << "\t";
+						outfile << symbol << "\t";
+
+						machLine.setInstruction(symbol);
+					}
+					else if (symNum == 2 && isCommand(symbol)) {
+						symNum = 4;
+						instruc = true;
+						cout << symNum << "\t";
+						outfile << symNum << "\t";
+						machLine.setInstruction(symbol);
+					}
+					else if (instruc)					{
+						instruc = false;
+						cout << symbol << "\t";
+						outfile << symbol << "\t";
+
+						machLine.setOper(symbol);
+					}
+														
+					else if (symNum >= comNum) {
+						cout << symbol << " ";
+						outfile << symbol << " ";
+
+						machLine.setComment(symbol);
+					}
+					else {
+						cout << symbol << "\t";
+						outfile << symbol << "\t";
+
+						machLine.setLineName(symbol);
+					}
+					symNum++;
+				}
+				else {
+					cout << "\t";
+					outfile << "\t";
+				}
+				symbol = "";
+			}
+			else {
+				symbol.append(1, newLine[i]);
+			}
+		}
+
+		memAddress = machLine.computeDecHex(memAddress, codeItems, instrucTable);
+		cout << endl;
+		}
 	}	
 
 	return 0;
