@@ -10,7 +10,7 @@ using namespace std;
 const int MAX_COUNT = 8;
 const int HEX_VAL = 10;
 const int HEX_BASE = 16;
-const string INSTRUCTION[MAX_COUNT] = { "ADD", "ADDI", "SUB", "SUBI",
+const string COMMANDS[MAX_COUNT] = { "ADD", "ADDI", "SUB", "SUBI",
 									    "MOVE", "ORG", "TRAP", "END" };
 const string HEX_VALS = "0123456789ABCDEF";
 
@@ -27,12 +27,11 @@ string convDec2Hex(string numVal) {
 }
 
 int convHex2Dec(string numVal) {
-	int total = 0, val = 0;
-	int loc = 0; 
-
-	for (int i = 0; i<numVal.size(); i++)
-	{		
-		for (int i = 0; i < HEX_VALS.size(); i++)
+	int total = 0, val = 0;	
+	int loc;
+	for (int i = 0; i<numVal.size(); i++) {	
+		loc = 0;
+		for (int j = 0; j < HEX_VALS.size(); j++)
 			if (toupper(numVal[numVal.size() - loc - 1]) == HEX_VALS[i])
 				val = i;
 
@@ -46,8 +45,16 @@ int convHex2Dec(string numVal) {
 
 bool isCommand(string symInstruc) {
 	string signCom = symInstruc;
-	for(int i = 0; i < symInstruc.size(); i++)
-		signInComm.at(i) = toupper()
+
+	for (int i = 0; i < symInstruc.size(); i++)
+		signCom.at(i) = toupper(signCom[i]);
+	
+	for (int j = 0; j < MAX_COUNT; j++)	{
+		if (COMMANDS[j] == signCom)
+			return true;
+	}
+
+	return false;
 }
 
 void spaceHexNum(string* numVal) {
@@ -266,5 +273,24 @@ private:
 };
 
 int main() {
+
+	ifstream infile;
+	ofstream outfile;
+	infile.open("dataFile.txt");
+	outfile.open("outFile.txt");
+
+	passAssem machLine;
+
+	vector<string> codeItems, instrucTable;
+	string memAddress = "0", newLine, symbol;
+	int symNum, comNum;
+	bool instruc = false;
+
+	while (!infile.eof()) {
+		
+		getline(infile, newLine);
+		symNum = 1, comNum = 5;
+	}	
+
 	return 0;
 }
