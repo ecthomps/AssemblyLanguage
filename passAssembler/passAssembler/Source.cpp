@@ -292,13 +292,14 @@ int main() {
 		symNum = 1, comNum = 5;
 
 		for (int i = 0; i < newLine.size(); i++) {
-			if (isspace(newLine[i]) || i == newLine.size() - 1)
-			{
+			
+			if (isspace(newLine[i]) || i == newLine.size() - 1) {
+				
 				if (i == newLine.size() - 1)
 					symbol.append(1, newLine[i]);
 
-				if (symbol.size() > 0)
-				{
+				if (symbol.size() > 0) {
+
 					if (symNum == 1 && isCommand(symbol)) {
 						symNum = 3;
 						instruc = true;
@@ -314,24 +315,20 @@ int main() {
 						outfile << symNum << "\t";
 						machLine.setInstruction(symbol);
 					}
-					else if (instruc)					{
+					else if (instruc) {
 						instruc = false;
 						cout << symbol << "\t";
 						outfile << symbol << "\t";
-
 						machLine.setOper(symbol);
-					}
-														
+					}														
 					else if (symNum >= comNum) {
 						cout << symbol << " ";
 						outfile << symbol << " ";
-
 						machLine.setComment(symbol);
 					}
 					else {
 						cout << symbol << "\t";
 						outfile << symbol << "\t";
-
 						machLine.setLineName(symbol);
 					}
 					symNum++;
@@ -346,11 +343,9 @@ int main() {
 				symbol.append(1, newLine[i]);
 			}
 		}
-
-		memAddress = machLine.computeDecHex(memAddress, codeItems, instrucTable);
-		cout << endl;
+			memAddress = machLine.computeDecHex(memAddress, codeItems, instrucTable);
+			cout << endl;
 		}
-	}	
-
+	
 	return 0;
 }
