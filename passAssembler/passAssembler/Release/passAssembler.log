@@ -1,0 +1,8 @@
+﻿  Source.cpp
+  Generating code
+c:\users\christian thompson\documents\github\assemblylanguage\passassembler\passassembler\source.cpp(455): warning C4715: 'TwoAssembler::getLocation': not all control paths return a value
+c:\users\christian thompson\documents\github\assemblylanguage\passassembler\passassembler\source.cpp(446): warning C4715: 'TwoAssembler::getCommand': not all control paths return a value
+  All 495 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  passAssembler.vcxproj -> C:\Users\Christian Thompson\Documents\GitHub\assemblyLanguage\passAssembler\Release\passAssembler.exe
+  passAssembler.vcxproj -> C:\Users\Christian Thompson\Documents\GitHub\assemblyLanguage\passAssembler\Release\passAssembler.pdb (Full PDB)
