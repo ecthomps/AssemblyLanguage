@@ -1,0 +1,5 @@
+﻿  Source.cpp
+c:\users\christian thompson\documents\github\assemblylanguage\passassembler\passassembler\source.cpp(455): warning C4715: 'TwoAssembler::getLocation': not all control paths return a value
+c:\users\christian thompson\documents\github\assemblylanguage\passassembler\passassembler\source.cpp(446): warning C4715: 'TwoAssembler::getCommand': not all control paths return a value
+  passAssembler.vcxproj -> C:\Users\Christian Thompson\Documents\GitHub\AssemblyLanguage\passAssembler\Debug\passAssembler.exe
+  passAssembler.vcxproj -> C:\Users\Christian Thompson\Documents\GitHub\AssemblyLanguage\passAssembler\Debug\passAssembler.pdb (Partial PDB)
