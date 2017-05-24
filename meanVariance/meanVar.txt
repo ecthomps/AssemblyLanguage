@@ -1,0 +1,66 @@
+; Name: Eranus Thompson
+; Calculating mean and variance
+
+INCLUDE Irvine32.inc 
+
+ .data 
+	arrayW WORD 10, 12, 8, 17, 9, 22, 
+		    	18, 11, 23, 7, 30, 22,
+		    	19, 6, 7
+	x WORD 15;
+
+	sum  WORD ?
+	mean WORD ?
+	var WORD ?
+
+	shwMean BYTE "MEAN ", 0
+	shwVar  BYTE "VAR ", 0
+
+.code 
+main PROC
+	
+	mov edx, offset shwMean 
+	call WriteString	
+	mov edx, 0
+
+	mov edi, OFFSET arrayW 
+	mov ecx, LENGTHOF arrayW
+	mov ax, 0
+	
+	L1: 
+		add ax, [edi]
+		add edi, TYPE arrayW
+		loop L1
+	
+	mov dx, 0
+	div x
+	mov mean, ax
+	call WriteDec
+	call crlf
+	
+	mov edx, 0
+	mov edx, offset shwVar 
+	call WriteString
+	
+	mov edi, OFFSET arrayW
+	mov ecx, LENGTHOF arrayW
+	mov ax, 0
+
+	L2: 
+		mov bx, 0
+		mov bx, [edi]
+		sub bx, mean
+		imul bx, bx
+		add ax, bx
+		add edi, TYPE arrayW
+		Loop L2
+	
+	mov dx, 0
+	div x
+	mov var, ax
+	call WriteDec
+	call crlf
+			
+	INVOKE ExitProcess,0 
+   main ENDP
+ END main 
