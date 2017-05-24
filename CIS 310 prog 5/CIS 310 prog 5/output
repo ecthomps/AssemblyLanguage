@@ -1,0 +1,14 @@
+******************************************************************************
+* Thank you for using the program.				              *
+* This program simulates a 2-pass assembler in C++.                           *
+* The input to this program is an assembly language program.                  *
+* The output includes a symbol table and the machine code version of the input*
+* You can view the output through the output file labeled ' output.txt '      *
+*******************************************************************************
+
+Please, Enter the assembly file name: // followed by the extentiosn for example input.txt
+Inputting Data .........
+
+
+
+
